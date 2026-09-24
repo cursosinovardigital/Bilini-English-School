@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bilini Language School | Método de Conversação Real e Descomplicado</title>
+    <title>Bilini Language School | Muito Mais que Inglês. Fluência Real e Vivência.</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Pro / Free CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Alpine.js para Interatividade Nativa sem dor de cabeça -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -21,32 +22,46 @@
                 extend: {
                     colors: {
                         bilini: {
-                            deep: '#1E052E',
-                            dark: '#2B0A42',
+                            obsidian: '#12021E',
+                            deep: '#1D0530',
+                            plum: '#2E084D',
                             primary: '#5B1B8A',
-                            light: '#7F22C0',
-                            vibrant: '#9333EA',
+                            vibrant: '#7E22CE',
+                            electric: '#A855F7',
+                            lavender: '#F3E8FF',
                             accent: '#F59E0B',
                             gold: '#FBBF24',
                             surface: '#FAF7FD',
-                            card: '#FFFFFF'
+                            border: '#E9D5FF'
                         }
                     },
                     fontFamily: {
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
                     },
                     animation: {
-                        'marquee': 'marquee 25s linear infinite',
-                        'float': 'float 4s ease-in-out infinite',
+                        'marquee': 'marquee 30s linear infinite',
+                        'marquee-reverse': 'marquee-reverse 30s linear infinite',
+                        'pulse-glow': 'pulseGlow 2.5s infinite',
+                        'float-slow': 'floatSlow 5s ease-in-out infinite',
                     },
                     keyframes: {
                         marquee: {
                             '0%': { transform: 'translateX(0%)' },
                             '100%': { transform: 'translateX(-50%)' },
                         },
-                        float: {
+                        'marquee-reverse': {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0%)' },
+                        },
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 0 0 rgba(245, 158, 11, 0.7)' },
+                            '70%': { boxShadow: '0 0 0 18px rgba(245, 158, 11, 0)' },
+                            '100%': { boxShadow: '0 0 0 0 rgba(245, 158, 11, 0)' },
+                        },
+                        floatSlow: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(-12px)' },
                         }
                     }
                 }
@@ -54,156 +69,217 @@
         }
     </script>
     <style>
-        .gradient-hero {
-            background: radial-gradient(circle at 80% 20%, #7F22C0 0%, #2B0A42 50%, #1E052E 100%);
+        .hero-mesh {
+            background-color: #12021E;
+            background-image: 
+                radial-gradient(at 90% 10%, #7E22CE 0px, transparent 50%),
+                radial-gradient(at 10% 90%, #2E084D 0px, transparent 50%),
+                radial-gradient(at 50% 50%, #1D0530 0px, transparent 60%);
         }
-        .gradient-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
-        .pulse-gold {
-            animation: pulse-glow 2.5s infinite;
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(233, 213, 255, 0.6);
         }
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
-            70% { box-shadow: 0 0 0 16px rgba(245, 158, 11, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        .gradient-text {
+            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #FFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="bg-bilini-surface text-gray-800 antialiased font-sans selection:bg-bilini-accent selection:text-bilini-deep" x-data="{ modalOpen: false, tabCursos: 'adultos' }">
+<body class="bg-bilini-surface text-gray-800 antialiased font-sans" x-data="{ mobileMenu: false, modalLead: false, cursoTab: 'hibrido', calcMeses: 12, objetivo: 'carreira' }">
 
-    <!-- FAIXA TOPO (URGÊNCIA / CONVERSÃO) -->
-    <div class="bg-bilini-accent text-bilini-deep font-extrabold text-xs md:text-sm py-2 px-4 text-center tracking-wide flex items-center justify-center gap-2">
-        <span class="bg-bilini-deep text-white px-2 py-0.5 rounded text-[10px] font-black uppercase">Exclusivo</span>
-        <span>Condições Especiais de Matrícula + 1 Aula Prática Experimental Gratuita!</span>
-        <a href="#agendamento" class="underline hover:text-black hidden sm:inline ml-2">Garantir Vaga &rarr;</a>
+    <!-- FAIXA SUPERIOR INSTITUCIONAL (ESTILO MINDS) -->
+    <div class="bg-bilini-obsidian border-b border-purple-900/50 text-xs py-2 px-6 hidden md:block">
+        <div class="max-w-7xl mx-auto flex justify-between items-center text-purple-200">
+            <div class="flex items-center gap-6">
+                <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-bilini-gold"></i> Unidade Presencial & Campus Digital</span>
+                <span class="flex items-center gap-2"><i class="fas fa-certificate text-bilini-gold"></i> Método com Prática Oral Diária</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://api.whatsapp.com/send?phone=5511991174412" target="_blank" class="hover:text-bilini-gold transition flex items-center gap-1.5 font-bold">
+                    <i class="fab fa-whatsapp text-green-400"></i> Central de Matrículas: (11) 99117-4412
+                </a>
+                <span class="text-purple-700">|</span>
+                <a href="https://instagram.com/bilinilanguageschool" target="_blank" class="hover:text-bilini-gold transition"><i class="fab fa-instagram"></i> @bilinilanguageschool</a>
+            </div>
+        </div>
     </div>
 
-    <!-- NAVBAR PRINCIPAL -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <!-- LOGO BILINI COMPLETA -->
-            <a href="#" class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-bilini-primary to-bilini-vibrant flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-purple-300/50">
-                    B
+    <!-- HEADER / NAVBAR STICKY -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex items-center justify-between">
+            
+            <!-- LOGOTIPO COMPLETO RECONSTRUÍDO VETORIAL -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-bilini-deep via-bilini-primary to-bilini-vibrant flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-105 transition">
+                    <!-- Símbolo Estilizado de Fala/Cérebro da Bilini -->
+                    <svg class="w-7 h-7 fill-current text-bilini-gold" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.25-1.31C8.68 21.49 10.29 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>
+                    </svg>
                 </div>
                 <div>
-                    <span class="text-2xl font-black tracking-tight text-bilini-primary uppercase block leading-none">BILINI</span>
-                    <span class="text-[9px] tracking-[0.25em] text-purple-600 font-bold uppercase block mt-1">Language School</span>
+                    <span class="font-display text-2xl font-black tracking-tight text-bilini-deep leading-none block uppercase">BILINI</span>
+                    <span class="text-[9px] tracking-[0.3em] font-extrabold text-bilini-primary uppercase block mt-1">Language School</span>
                 </div>
             </a>
 
-            <!-- LINKS DESKTOP -->
-            <nav class="hidden lg:flex items-center gap-8 font-bold text-sm text-gray-600">
-                <a href="#metodologia" class="hover:text-bilini-primary transition">Metodologia</a>
-                <a href="#comparativo" class="hover:text-bilini-primary transition">Diferenciais</a>
-                <a href="#cursos" class="hover:text-bilini-primary transition">Cursos</a>
-                <a href="#estrutura" class="hover:text-bilini-primary transition">Ambiente</a>
-                <a href="#faq" class="hover:text-bilini-primary transition">Dúvidas</a>
+            <!-- NAVEGAÇÃO DESKTOP -->
+            <nav class="hidden xl:flex items-center gap-7 font-bold text-sm text-gray-700">
+                <a href="#diferenciais" class="hover:text-bilini-primary transition">Por que a Bilini?</a>
+                <a href="#cursos" class="hover:text-bilini-primary transition">Nossos Cursos</a>
+                <a href="#metodologia" class="hover:text-bilini-primary transition">Metodologia 4H</a>
+                <a href="#espacos" class="hover:text-bilini-primary transition">Salas Temáticas</a>
+                <a href="#clube" class="hover:text-bilini-primary transition flex items-center gap-1.5 text-purple-700">
+                    <span class="w-2 h-2 rounded-full bg-bilini-accent"></span>
+                    Clube Bilini
+                </a>
+                <a href="#simulador" class="hover:text-bilini-primary transition text-gray-500">Calculadora de Fluência</a>
             </nav>
 
-            <!-- BOTAO DO HEADER -->
-            <div class="flex items-center gap-4">
-                <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Bilini%20e%20quero%20agendar%20minha%20aula%20experimental%20gratuita!" target="_blank"
-                   class="bg-bilini-primary hover:bg-bilini-deep text-white px-5 py-2.5 rounded-xl text-xs md:text-sm font-extrabold transition shadow-md flex items-center gap-2">
-                    <i class="fab fa-whatsapp text-green-400 text-base"></i>
-                    <span>Agendar Aula Grátis</span>
+            <!-- CTA WHATSAPP DIRETO -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Bilini%20e%20quero%20minha%20aula%20experimental%20gratuita!" 
+                   target="_blank"
+                   class="bg-gradient-to-r from-bilini-primary to-bilini-vibrant hover:from-bilini-plum hover:to-bilini-deep text-white px-6 py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-purple-600/30 flex items-center gap-2.5 transition transform hover:-translate-y-0.5">
+                    <i class="fab fa-whatsapp text-green-400 text-lg"></i>
+                    <span>Agendar Aula Gratuita</span>
                 </a>
             </div>
+
+            <!-- BOTÃO MOBILE -->
+            <button @click="mobileMenu = !mobileMenu" class="xl:hidden text-2xl text-bilini-deep p-2">
+                <i :class="mobileMenu ? 'fas fa-times' : 'fas fa-bars'"></i>
+            </button>
+        </div>
+
+        <!-- MENU MOBILE EXPANDIDO -->
+        <div x-show="mobileMenu" class="xl:hidden bg-white border-b border-purple-100 px-6 py-6 space-y-4" style="display: none;">
+            <a @click="mobileMenu = false" href="#diferenciais" class="block font-bold text-gray-800">Por que a Bilini?</a>
+            <a @click="mobileMenu = false" href="#cursos" class="block font-bold text-gray-800">Cursos</a>
+            <a @click="mobileMenu = false" href="#metodologia" class="block font-bold text-gray-800">Metodologia</a>
+            <a @click="mobileMenu = false" href="#espacos" class="block font-bold text-gray-800">Ambiente Temático</a>
+            <a @click="mobileMenu = false" href="#clube" class="block font-bold text-bilini-primary">Clube de Benefícios</a>
+            <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es!" class="w-full bg-bilini-primary text-white py-3 rounded-xl font-extrabold text-center block text-sm">
+                Falar no WhatsApp
+            </a>
         </div>
     </header>
 
-    <!-- HERO SECTION DE ALTO IMPACTO (ESTILO MINDS IDIOMAS) -->
-    <section class="gradient-hero text-white relative overflow-hidden pt-16 pb-24 md:py-28">
+    <!-- HERO SECTION (ESTILO INSTITUCIONAL MINDS COM CONTRASTE ROXO/DOURADO) -->
+    <section class="hero-mesh text-white relative overflow-hidden pt-12 pb-24 md:py-24">
+        <!-- Elementos de Luz de Fundo -->
+        <div class="absolute -top-40 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-20 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
         <div class="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <!-- COPY MATADORA -->
+            <!-- COPY PRINCIPAL -->
             <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-purple-200 border border-white/10">
-                    <span class="w-2.5 h-2.5 rounded-full bg-bilini-accent animate-ping"></span>
-                    Método Focado 100% em Prática Oral e Vivência
+                
+                <div class="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/15 text-xs font-bold text-purple-200">
+                    <span class="w-2.5 h-2.5 rounded-full bg-bilini-gold animate-ping"></span>
+                    Turmas Híbridas de até 6 Alunos | Presencial & Online
                 </div>
 
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight">
-                    Fale inglês com segurança, <br class="hidden sm:inline">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-bilini-gold via-yellow-300 to-yellow-500">sem travar e sem vergonha</span> de falar.
+                <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight">
+                    Aprenda inglês de verdade. <br>
+                    <span class="gradient-text">Em até 18 meses</span> com vivência prática e sem medo.
                 </h1>
 
-                <p class="text-base sm:text-lg text-purple-100 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                    Você já perdeu tempo demais decorando regras em lousas de cursos convencionais. Na <strong>Bilini</strong>, o aprendizado é dinâmico, humanizado e focado em fazer você pensar e se comunicar em inglês desde o primeiro encontro.
+                <p class="text-base sm:text-lg text-purple-200/90 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                    Abandone de vez os cursinhos engessados que te prendem por 4 ou 5 anos em regras teóricas. Na <strong>Bilini Language School</strong>, você pratica conversação desde o primeiro dia de aula em turmas super reduzidas e salas temáticas imersivas.
                 </p>
 
-                <!-- BOTÕES DE AÇÃO HERO -->
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Quero%20agendar%20minha%20aula%20experimental%20gratuita%20na%20Bilini!" 
-                       target="_blank" 
-                       class="pulse-gold bg-bilini-accent hover:bg-yellow-500 text-bilini-deep font-black px-8 py-4 rounded-xl text-base transition duration-300 shadow-2xl flex items-center justify-center gap-3">
+                <!-- BOTÕES DE CHAMADA -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
+                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20agendar%20minha%20aula%20experimental%20gratuita%20na%20Bilini!" 
+                       target="_blank"
+                       class="animate-pulse-glow bg-gradient-to-r from-bilini-accent to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-bilini-obsidian font-black px-8 py-4 rounded-xl text-base transition shadow-2xl flex items-center justify-center gap-3">
                         <i class="fab fa-whatsapp text-xl"></i>
                         <span>QUERO MINHA AULA EXPERIMENTAL</span>
                     </a>
-                    <a href="#cursos" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-7 py-4 rounded-xl text-base transition flex items-center justify-center">
-                        Explorar Modalidades
+
+                    <a href="#cursos" class="glass-panel hover:bg-white/10 text-white font-extrabold px-6 py-4 rounded-xl text-base transition flex items-center justify-center gap-2">
+                        <span>Ver Opções de Cursos</span>
+                        <i class="fas fa-arrow-down text-xs text-purple-300"></i>
                     </a>
                 </div>
 
-                <!-- SELOS DE GARANTIA -->
-                <div class="pt-6 grid grid-cols-3 gap-4 border-t border-white/10 text-center lg:text-left text-xs text-purple-200">
+                <!-- SELOS DE CONFIANÇA (ESTILO MINDS) -->
+                <div class="pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center lg:text-left">
                     <div>
-                        <p class="font-extrabold text-white text-base">Turmas VIP</p>
-                        <p class="text-purple-300 text-[11px]">Máximo tempo de fala</p>
+                        <p class="font-display text-2xl font-black text-white">Até 6 Alunos</p>
+                        <p class="text-[11px] text-purple-300">Máxima prática oral</p>
                     </div>
                     <div>
-                        <p class="font-extrabold text-white text-base">Kids a Adultos</p>
-                        <p class="text-purple-300 text-[11px]">Planos para cada idade</p>
+                        <p class="font-display text-2xl font-black text-bilini-gold">18 Meses</p>
+                        <p class="text-[11px] text-purple-300">Fluência nas 4 áreas</p>
                     </div>
                     <div>
-                        <p class="font-extrabold text-white text-base">Presencial e Online</p>
-                        <p class="text-purple-300 text-[11px]">Flexibilidade total</p>
+                        <p class="font-display text-2xl font-black text-white">100% Flex</p>
+                        <p class="text-[11px] text-purple-300">Online & Presencial</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl font-black text-white">Zero Multa</p>
+                        <p class="text-[11px] text-purple-300">Sem contratos abusivos</p>
                     </div>
                 </div>
+
             </div>
 
-            <!-- FORMULÁRIO DE CONVERSÃO IMEDIATA -->
-            <div class="lg:col-span-5" id="agendamento">
-                <div class="bg-white rounded-3xl shadow-2xl p-8 text-gray-900 border border-purple-100 relative">
-                    <div class="text-center mb-6">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-bilini-primary bg-purple-100 px-3 py-1 rounded-full">
-                            Sem compromisso
-                        </span>
-                        <h3 class="text-2xl font-black text-bilini-deep mt-2">Dê o primeiro passo</h3>
-                        <p class="text-xs text-gray-500 mt-1">Preencha e nossa coordenação entrará em contato via WhatsApp com horários disponíveis.</p>
+            <!-- FORMULÁRIO DE ALTA CONVERSÃO DIRETO PARA O WHATSAPP DELA -->
+            <div class="lg:col-span-5">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 border-4 border-purple-100 text-gray-900 relative">
+                    <div class="absolute -top-3.5 right-6 bg-bilini-accent text-bilini-obsidian text-[10px] font-black uppercase tracking-wider py-1 px-3.5 rounded-full shadow-md">
+                        Sem taxa de matrícula hoje
                     </div>
 
-                    <form class="space-y-4" onsubmit="event.preventDefault(); enviarFormularioWhatsApp();">
+                    <div class="mb-6 text-center">
+                        <h3 class="font-display text-2xl font-black text-bilini-deep">Solicite sua Demonstração</h3>
+                        <p class="text-xs text-gray-500 mt-1">Conheça nossa dinâmica sem pagar nada e ganhe teste de nível.</p>
+                    </div>
+
+                    <form class="space-y-4" onsubmit="event.preventDefault(); enviarFormLead();">
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Seu Nome Completo</label>
-                            <input type="text" id="leadNome" required placeholder="Ex: Roberto Gomes" 
-                                   class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:border-bilini-primary focus:ring-2 focus:ring-purple-100 text-sm">
+                            <label class="block text-xs font-black uppercase text-gray-700 mb-1">Nome Completo</label>
+                            <input type="text" id="formNome" required placeholder="Ex: Roberto Carlos" 
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-bilini-primary focus:ring-2 focus:ring-purple-100 text-sm font-medium">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">WhatsApp com DDD</label>
-                            <input type="tel" id="leadWhatsapp" required placeholder="(11) 99999-9999" 
-                                   class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:border-bilini-primary focus:ring-2 focus:ring-purple-100 text-sm">
+                            <label class="block text-xs font-black uppercase text-gray-700 mb-1">WhatsApp de Contato</label>
+                            <input type="tel" id="formZap" required placeholder="(11) 99999-9999" 
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-bilini-primary focus:ring-2 focus:ring-purple-100 text-sm font-medium">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Qual é o seu objetivo?</label>
-                            <select id="leadObjetivo" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:border-bilini-primary text-sm bg-white font-medium">
-                                <option value="Destravar fala para trabalho e reuniões">Destravar fala para trabalho e reuniões</option>
-                                <option value="Inglês para Crianças / Filhos (Kids & Teens)">Inglês para Filhos (Kids & Teens)</option>
-                                <option value="Inglês Rápido para Viagens ao Exterior">Inglês Rápido para Viagens ao Exterior</option>
-                                <option value="Aulas Particulares VIP">Aulas Particulares VIP</option>
-                                <option value="Aprender do Absoluto Zero">Aprender do Absoluto Zero</option>
+                            <label class="block text-xs font-black uppercase text-gray-700 mb-1">Qual é a sua modalidade de preferência?</label>
+                            <select id="formModalidade" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-bilini-primary text-sm font-medium bg-white">
+                                <option value="Curso Híbrido 18 Meses (Presencial + Online)">Curso Híbrido 18 Meses (Presencial + Online)</option>
+                                <option value="Kids and Teens (9 aos 17 anos)">Kids and Teens (9 aos 17 anos)</option>
+                                <option value="Curso Flash (Intensivo de 30 a 60 dias)">Curso Flash (Intensivo de 30 a 60 dias)</option>
+                                <option value="Aulas VIP Individuais">Aulas VIP Individuais (Exclusivo)</option>
+                                <option value="In Company (Para Empresas)">In Company (Para Empresas e Equipes)</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="w-full bg-bilini-primary hover:bg-bilini-deep text-white font-extrabold py-4 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
-                            <span>Quero Agendar Minha Aula</span>
+                        <button type="submit" class="w-full bg-gradient-to-r from-bilini-primary to-bilini-vibrant hover:from-bilini-deep hover:to-bilini-primary text-white font-extrabold py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 uppercase tracking-wider text-xs sm:text-sm">
+                            <span>Quero Minha Aula Experimental</span>
                             <i class="fab fa-whatsapp text-green-400 text-lg"></i>
                         </button>
 
-                        <p class="text-[11px] text-center text-gray-400">Atendimento 100% humanizado no número oficial da escola.</p>
+                        <div class="flex items-center justify-center gap-2 text-[11px] text-gray-400">
+                            <i class="fas fa-lock"></i>
+                            <span>Seus dados estão protegidos com total privacidade.</span>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -211,247 +287,316 @@
         </div>
     </section>
 
-    <!-- MARQUEE INFINITO (ELEMENTO MOTION TÍPICO DAS GRANDES FRANQUIAS) -->
-    <div class="bg-bilini-deep py-4 overflow-hidden border-y border-purple-900/40">
+    <!-- MARQUEE MOTION 1 (ELEMENTO MARCANTE DO MINDS) -->
+    <div class="bg-bilini-obsidian py-3.5 border-y border-purple-900/60 overflow-hidden">
         <div class="flex whitespace-nowrap animate-marquee">
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-star text-bilini-gold"></i> Método Conversacional</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-check text-bilini-gold"></i> Sem Medo de Falar</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-star text-bilini-gold"></i> Turmas Reduzidas</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-check text-bilini-gold"></i> Horários Flexíveis</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-star text-bilini-gold"></i> Preparatório de Carreira</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-check text-bilini-gold"></i> Kids & Teens Dinâmico</span>
-            <!-- Repetição para o loop contínuo -->
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-star text-bilini-gold"></i> Método Conversacional</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-check text-bilini-gold"></i> Sem Medo de Falar</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-star text-bilini-gold"></i> Turmas Reduzidas</span>
-            <span class="text-sm font-extrabold text-purple-300 mx-6 uppercase flex items-center gap-2"><i class="fas fa-check text-bilini-gold"></i> Horários Flexíveis</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-bolt text-bilini-gold"></i> Método Minds & Bilini Validado</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-check text-bilini-gold"></i> Turmas de até 6 alunos</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-star text-bilini-gold"></i> Salas Temáticas Exclusivas</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-globe text-bilini-gold"></i> Plataforma EAD Complementar</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-bolt text-bilini-gold"></i> Fluência Real em 18 Meses</span>
+            <!-- Repetição do loop -->
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-bolt text-bilini-gold"></i> Método Minds & Bilini Validado</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-check text-bilini-gold"></i> Turmas de até 6 alunos</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-star text-bilini-gold"></i> Salas Temáticas Exclusivas</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-globe text-bilini-gold"></i> Plataforma EAD Complementar</span>
+            <span class="text-xs font-black tracking-wider text-purple-300 uppercase mx-6 flex items-center gap-2"><i class="fas fa-bolt text-bilini-gold"></i> Fluência Real em 18 Meses</span>
         </div>
     </div>
 
-    <!-- METODOLOGIA EM 4 PASSOS (O CAMINHO DA FLUÊNCIA) -->
-    <section id="metodologia" class="py-24 bg-white">
+    <!-- SEÇÃO "POR QUE A BILINI?" (OS 4 PILARES DA MINDS ADAPTADOS À BILINI) -->
+    <section id="diferenciais" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-bilini-primary font-extrabold text-xs uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Metodologia Bilini</span>
-                <h2 class="text-3xl sm:text-4xl font-black text-bilini-deep mt-4">Como você atinge a fluência real aqui?</h2>
-                <p class="text-gray-600 mt-3 text-base">Uma abordagem pedagógica projetada para você pensar direto em inglês, sem traduzir mentalmente.</p>
+                <span class="text-xs font-extrabold text-bilini-primary uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Sua Melhor Opção</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-black text-bilini-deep mt-4">Por que a Bilini Language School?</h2>
+                <p class="text-gray-600 mt-3 text-base">A Bilini não é apenas um cursinho de regras. É um centro de imersão onde você aprende inglês de forma rápida, interativa e sem constrangimento.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- PASSO 1 -->
-                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 relative group hover:border-bilini-primary transition">
-                    <span class="text-4xl font-black text-purple-200 group-hover:text-bilini-primary transition">01</span>
-                    <h3 class="text-xl font-extrabold text-bilini-deep mt-4 mb-2">Diagnóstico Inicial</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">Avaliamos seu nível real e seus objetivos individuais para direcionar você para o formato mais produtivo.</p>
+                <!-- PILAR 1 -->
+                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 hover:border-bilini-primary hover:shadow-xl transition group duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 group-hover:bg-bilini-primary text-bilini-primary group-hover:text-white flex items-center justify-center text-2xl mb-6 transition">
+                        <i class="fas fa-laptop-house"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-black text-bilini-deep mb-2">Curso Híbrido Total</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                        Aproveite 100% de flexibilidade! Você escolhe fazer as aulas no ambiente presencial ou online ao vivo, conforme a correria da sua semana.
+                    </p>
                 </div>
 
-                <!-- PASSO 2 -->
-                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 relative group hover:border-bilini-primary transition">
-                    <span class="text-4xl font-black text-purple-200 group-hover:text-bilini-primary transition">02</span>
-                    <h3 class="text-xl font-extrabold text-bilini-deep mt-4 mb-2">Imersão Prática</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">Você fala inglês desde o primeiro minuto. A gramática entra de forma contextualizada, não mecânica.</p>
+                <!-- PILAR 2 -->
+                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 hover:border-bilini-primary hover:shadow-xl transition group duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 group-hover:bg-bilini-primary text-bilini-primary group-hover:text-white flex items-center justify-center text-2xl mb-6 transition">
+                        <i class="fas fa-users-line"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-black text-bilini-deep mb-2">Turmas de até 6 Alunos</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                        Esqueça auditórios cheios. Com turmas pequenas, o professor acompanha sua pronúncia individual e você fala inglês durante a aula inteira.
+                    </p>
                 </div>
 
-                <!-- PASSO 3 -->
-                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 relative group hover:border-bilini-primary transition">
-                    <span class="text-4xl font-black text-purple-200 group-hover:text-bilini-primary transition">03</span>
-                    <h3 class="text-xl font-extrabold text-bilini-deep mt-4 mb-2">Ambiente Seguro</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">Aqui ninguém ri dos seus tropeços. Nossos professores corrigem você com naturalidade, eliminando o bloqueio.</p>
+                <!-- PILAR 3 -->
+                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 hover:border-bilini-primary hover:shadow-xl transition group duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-yellow-100 group-hover:bg-bilini-accent text-bilini-accent group-hover:text-bilini-obsidian flex items-center justify-center text-2xl mb-6 transition">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-black text-bilini-deep mb-2">Fluência em 18 Meses</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                        Domine as 4 habilidades essenciais (ouvir, falar, ler e escrever) em apenas um ano e meio, sem enrolação e com foco no mercado.
+                    </p>
                 </div>
 
-                <!-- PASSO 4 -->
-                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 relative group hover:border-bilini-primary transition">
-                    <span class="text-4xl font-black text-purple-200 group-hover:text-bilini-primary transition">04</span>
-                    <h3 class="text-xl font-extrabold text-bilini-deep mt-4 mb-2">Fluência Espontânea</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">O resultado é a autonomia de viajar, conduzir reuniões e assistir filmes sem depender de legendas.</p>
+                <!-- PILAR 4 -->
+                <div class="bg-bilini-surface p-8 rounded-3xl border border-purple-100 hover:border-bilini-primary hover:shadow-xl transition group duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 group-hover:bg-bilini-primary text-bilini-primary group-hover:text-white flex items-center justify-center text-2xl mb-6 transition">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-black text-bilini-deep mb-2">Sem Medo de Falar</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                        Ambiente acolhedor e dinâmico que elimina a vergonha de errar. Destrave seu potencial de conversação sem julgamentos.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO COMPARATIVA: ESCOLA TRADICIONAL VS. BILINI (GATILHO DE VALOR) -->
-    <section id="comparativo" class="py-24 bg-bilini-surface border-y border-purple-100">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-bilini-primary font-extrabold text-xs uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Compare e Decida</span>
-                <h2 class="text-3xl sm:text-4xl font-black text-bilini-deep mt-4">A diferença entre estudar anos e realmente falar</h2>
-            </div>
+    <!-- SALAS TEMÁTICAS E AMBIENTE IMERSIVO (COPIA DA MINDS) -->
+    <section id="espacos" class="py-24 bg-bilini-deep text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-black uppercase text-bilini-gold tracking-widest bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
+                        Vivência 100% Real
+                    </span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-black leading-tight">
+                        Salas temáticas inspiradas no mundo real.
+                    </h2>
+                    <p class="text-purple-200 text-base leading-relaxed">
+                        Assim como as melhores escolas internacionais, a Bilini troca a lousa chata por espaços inspirados em <strong>cafés, lounges, aeroportos e ambientes corporativos</strong>. Você pratica pedir uma bebida, apresentar um projeto ou fazer um check-in como se estivesse no exterior.
+                    </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- ESCOLA TRADICIONAL -->
-                <div class="bg-white p-8 rounded-3xl border border-red-100 shadow-sm">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 rounded-full bg-red-100 text-red-500 flex items-center justify-center font-bold">
-                            <i class="fas fa-times"></i>
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-3 text-sm">
+                            <i class="fas fa-check-circle text-bilini-gold text-lg"></i>
+                            <span>Ambiente acolhedor, descontraído e climatizado</span>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-700">Cursos Tradicionais</h3>
+                        <div class="flex items-center gap-3 text-sm">
+                            <i class="fas fa-check-circle text-bilini-gold text-lg"></i>
+                            <span>Simulações de situações cotidianas e reuniões reais</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm">
+                            <i class="fas fa-check-circle text-bilini-gold text-lg"></i>
+                            <span>Eventos comemorativos como Halloween, St. Patrick's e Arraiá bilíngue</span>
+                        </div>
                     </div>
-                    <ul class="space-y-4 text-sm text-gray-600">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-times-circle text-red-400 mt-1"></i>
-                            <span>Salas lotadas com 20 a 30 alunos (você fala menos de 2 minutos).</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-times-circle text-red-400 mt-1"></i>
-                            <span>Foco excessivo em regras gramaticais e exercícios de preenchimento.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-times-circle text-red-400 mt-1"></i>
-                            <span>Ambiente frio e formal que gera medo de errar na frente da turma.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-times-circle text-red-400 mt-1"></i>
-                            <span>Contratos engessados de 4 a 5 anos com multas abusivas.</span>
-                        </li>
-                    </ul>
+
+                    <div class="pt-4">
+                        <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Quero%20conhecer%20as%20salas%20tem%C3%A1ticas%20da%20Bilini!" target="_blank"
+                           class="inline-flex items-center gap-2 bg-bilini-accent hover:bg-yellow-500 text-bilini-obsidian font-black px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                            <span>Conhecer o Espaço Presencial</span>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- BILINI LANGUAGE SCHOOL -->
-                <div class="bg-gradient-to-br from-bilini-primary to-bilini-deep p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 rounded-full bg-bilini-accent text-bilini-deep flex items-center justify-center font-bold">
-                            <i class="fas fa-check"></i>
+                <!-- CARDS ILUSTRATIVOS DE SALAS TEMÁTICAS -->
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <div class="bg-white/10 border border-white/10 p-6 rounded-3xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center text-bilini-gold text-xl">
+                            <i class="fas fa-coffee"></i>
                         </div>
-                        <h3 class="text-xl font-extrabold text-white">Bilini Language School</h3>
+                        <h4 class="font-bold text-lg">Coffee & Lounge</h4>
+                        <p class="text-xs text-purple-200">Bate-papos informais para destravar a velocidade do seu raciocínio.</p>
                     </div>
-                    <ul class="space-y-4 text-sm text-purple-100">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-bilini-gold mt-1"></i>
-                            <span><strong>Turmas Reduzidas:</strong> Foco total na sua fala e correções personalizadas.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-bilini-gold mt-1"></i>
-                            <span><strong>Conversação Viva:</strong> Situações práticas do cotidiano e do mundo real.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-bilini-gold mt-1"></i>
-                            <span><strong>Acolhimento Humanizado:</strong> Liberdade para falar, errar e evoluir sem vergonha.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-bilini-gold mt-1"></i>
-                            <span><strong>Progresso Acelerado:</strong> Você percebe sua evolução a cada mês.</span>
-                        </li>
-                    </ul>
+
+                    <div class="bg-white/10 border border-white/10 p-6 rounded-3xl space-y-3 mt-6">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center text-bilini-gold text-xl">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Business Room</h4>
+                        <p class="text-xs text-purple-200">Simulação de reuniões em inglês, pitches e entrevistas de emprego.</p>
+                    </div>
+
+                    <div class="bg-white/10 border border-white/10 p-6 rounded-3xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center text-bilini-gold text-xl">
+                            <i class="fas fa-plane-departure"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Airport & Hotel</h4>
+                        <p class="text-xs text-purple-200">Situações de imigração, compras e turismo para viajar sem frio na barriga.</p>
+                    </div>
+
+                    <div class="bg-white/10 border border-white/10 p-6 rounded-3xl space-y-3 mt-6">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center text-bilini-gold text-xl">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Kids Arena</h4>
+                        <p class="text-xs text-purple-200">Jogos e dinâmicas lúdicas para prender a atenção das crianças e teens.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABAS INTERATIVAS DE CURSOS (ESTILO MINDS) -->
+    <!-- GRADE COMPLETA DE CURSOS DA MINDS ADAPTADA À BILINI -->
     <section id="cursos" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-bilini-primary font-extrabold text-xs uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Nossas Trilhas</span>
-                <h2 class="text-3xl sm:text-4xl font-black text-bilini-deep mt-4">Cursos desenhados para a sua fase</h2>
-                <p class="text-gray-600 mt-2 text-sm">Selecione uma categoria para conhecer a estrutura:</p>
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold text-bilini-primary uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Catálogo Completo</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-black text-bilini-deep mt-4">Conheça nossos cursos de inglês</h2>
+                <p class="text-gray-600 mt-3 text-base">A Bilini Language School tem a opção certa para cada idade, rotina e urgência profissional.</p>
             </div>
 
-            <!-- CONTROLES DAS ABAS -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button @click="tabCursos = 'adultos'" :class="tabCursos === 'adultos' ? 'bg-bilini-primary text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'" class="px-6 py-3 rounded-xl font-extrabold text-xs md:text-sm transition">
-                    Adultos & Profissionais
-                </button>
-                <button @click="tabCursos = 'kids'" :class="tabCursos === 'kids' ? 'bg-bilini-primary text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'" class="px-6 py-3 rounded-xl font-extrabold text-xs md:text-sm transition">
-                    Kids & Teens (Crianças)
-                </button>
-                <button @click="tabCursos = 'viagem'" :class="tabCursos === 'viagem' ? 'bg-bilini-primary text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'" class="px-6 py-3 rounded-xl font-extrabold text-xs md:text-sm transition">
-                    Imersão Viagem Rápida
-                </button>
-                <button @click="tabCursos = 'vip'" :class="tabCursos === 'vip' ? 'bg-bilini-primary text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'" class="px-6 py-3 rounded-xl font-extrabold text-xs md:text-sm transition">
-                    Aulas VIP Particulares
-                </button>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- CURSO 1: 18 MESES (O CARRO-CHEFE) -->
+                <div class="rounded-3xl border-2 border-bilini-primary p-8 bg-bilini-surface relative flex flex-col justify-between shadow-xl">
+                    <span class="absolute -top-3.5 right-6 bg-bilini-primary text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full">
+                        Mais Procurado
+                    </span>
+                    <div>
+                        <span class="text-xs font-black uppercase text-purple-700 bg-purple-200/60 px-2.5 py-1 rounded">18 a 24 Meses</span>
+                        <h3 class="font-display text-2xl font-black text-bilini-deep mt-4">Curso 18 Meses</h3>
+                        <p class="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                            Curso híbrido com aulas presenciais e online. Turmas de até 6 alunos com foco cirúrgico em conversação para você dominar as 4 habilidades no menor tempo possível.
+                        </p>
+                        <div class="mt-6 space-y-2 text-xs font-bold text-gray-700">
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Turmas reduzidas com máximo tempo de fala</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Acesso à plataforma e plantão de dúvidas</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Extensão opcional para 24 meses pós-avançado</p>
+                        </div>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20detalhes%20do%20Curso%2018%20Meses%20da%20Bilini." target="_blank"
+                       class="mt-8 w-full block text-center bg-bilini-primary hover:bg-bilini-deep text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+                        Consultar Turmas do 18 Meses &rarr;
+                    </a>
+                </div>
+
+                <!-- CURSO 2: CURSO FLASH (30 DIAS) -->
+                <div class="rounded-3xl border border-purple-100 p-8 bg-white hover:border-bilini-primary transition shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-black uppercase text-amber-700 bg-yellow-100 px-2.5 py-1 rounded">Intensivo Rápido</span>
+                        <h3 class="font-display text-2xl font-black text-bilini-deep mt-4">Curso Flash</h3>
+                        <p class="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                            No nosso curso intensivo você aprende o essencial em apenas 30 a 60 dias! Ideal para quem tem uma viagem marcada, entrevista de emprego próxima ou quer destravar o pontapé inicial.
+                        </p>
+                        <div class="mt-6 space-y-2 text-xs font-bold text-gray-700">
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Vocabulário de emergência e situações reais</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Aulas focadas em áudio e respostas rápidas</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Carga horária acelerada na medida certa</p>
+                        </div>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Preciso%20de%20ingl%C3%AAs%20r%C3%A1pido%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20do%20Curso%20Flash." target="_blank"
+                       class="mt-8 w-full block text-center bg-purple-100 hover:bg-bilini-primary text-bilini-primary hover:text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+                        Ver Datas do Flash &rarr;
+                    </a>
+                </div>
+
+                <!-- CURSO 3: KIDS AND TEENS (9 A 17 ANOS) -->
+                <div class="rounded-3xl border border-purple-100 p-8 bg-white hover:border-bilini-primary transition shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-black uppercase text-purple-700 bg-purple-100 px-2.5 py-1 rounded">9 aos 17 Anos</span>
+                        <h3 class="font-display text-2xl font-black text-bilini-deep mt-4">Kids & Teens</h3>
+                        <p class="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                            Inglês de forma dinâmica e interativa desenvolvido especificamente para crianças e adolescentes. Gamificação, vivência lúdica e estímulo para pronúncia nativa sem traumas escolares.
+                        </p>
+                        <div class="mt-6 space-y-2 text-xs font-bold text-gray-700">
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Jogos e desafios pedagógicos práticos</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Apoio nos testes e matérias do colégio</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Acompanhamento frequente com os pais</p>
+                        </div>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20saber%20valores%20para%20o%20Kids%20and%20Teens%20da%20Bilini." target="_blank"
+                       class="mt-8 w-full block text-center bg-purple-100 hover:bg-bilini-primary text-bilini-primary hover:text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+                        Conhecer o Kids & Teens &rarr;
+                    </a>
+                </div>
+
+                <!-- CURSO 4: ATENDIMENTOS E VIAGENS -->
+                <div class="rounded-3xl border border-purple-100 p-8 bg-white hover:border-bilini-primary transition shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-black uppercase text-purple-700 bg-purple-100 px-2.5 py-1 rounded">Duração 6 Meses</span>
+                        <h3 class="font-display text-2xl font-black text-bilini-deep mt-4">Atendimentos & Viagens</h3>
+                        <p class="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                            Voltado para iniciantes que precisam atender clientes gringos no comércio, hotelaria e recepção, ou para quem quer viajar pelo mundo sem depender de tradutor no celular.
+                        </p>
+                        <div class="mt-6 space-y-2 text-xs font-bold text-gray-700">
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Diálogos em aeroportos, alfândega e lojas</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Atendimento ao cliente estrangeiro</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Duração compacta de 6 meses</p>
+                        </div>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20do%20curso%20de%20Atendimentos%20e%20Viagens." target="_blank"
+                       class="mt-8 w-full block text-center bg-purple-100 hover:bg-bilini-primary text-bilini-primary hover:text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+                        Ver Programa de Viagens &rarr;
+                    </a>
+                </div>
+
+                <!-- CURSO 5: IN COMPANY (CORPORATIVO) -->
+                <div class="rounded-3xl border border-purple-100 p-8 bg-white hover:border-bilini-primary transition shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-black uppercase text-purple-700 bg-purple-100 px-2.5 py-1 rounded">Para Empresas</span>
+                        <h3 class="font-display text-2xl font-black text-bilini-deep mt-4">Curso In Company</h3>
+                        <p class="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                            Leve o inglês para dentro da sua equipe! Nossos professores ministram aulas online ou presenciais na sua empresa, adaptadas ao vocabulário técnico do seu segmento.
+                        </p>
+                        <div class="mt-6 space-y-2 text-xs font-bold text-gray-700">
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Relatórios de presença e desempenho para RH</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Treinamento de apresentações e e-mails globais</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Condições corporativas especiais por colaborador</p>
+                        </div>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20uma%20proposta%20do%20Curso%20In%20Company%20para%20minha%20empresa." target="_blank"
+                       class="mt-8 w-full block text-center bg-purple-100 hover:bg-bilini-primary text-bilini-primary hover:text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+                        Solicitar Proposta Empresa &rarr;
+                    </a>
+                </div>
+
+                <!-- CURSO 6: UP PLUS / MENTORIA VIP -->
+                <div class="rounded-3xl border border-purple-100 p-8 bg-white hover:border-bilini-primary transition shadow-sm hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-black uppercase text-purple-700 bg-purple-100 px-2.5 py-1 rounded">Avançado & VIP</span>
+                        <h3 class="font-display text-2xl font-black text-bilini-deep mt-4">Curso Up Plus & VIP</h3>
+                        <p class="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                            Para alunos que já concluíram níveis avançados e desejam manter o contato diário com debates culturais de alto nível, ou para executivos que necessitam de aulas 1 a 1 particulares.
+                        </p>
+                        <div class="mt-6 space-y-2 text-xs font-bold text-gray-700">
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Debates sobre geopolítica, cinema e liderança</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Horários flexíveis remarcáveis</p>
+                            <p><i class="fas fa-check text-bilini-primary mr-2"></i> Refinamento de sotaque e fluidez natural</p>
+                        </div>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20aulas%20VIP%20e%20o%20Up%20Plus." target="_blank"
+                       class="mt-8 w-full block text-center bg-purple-100 hover:bg-bilini-primary text-bilini-primary hover:text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+                        Consultar Vagas VIP &rarr;
+                    </a>
+                </div>
+
             </div>
+        </div>
+    </section>
 
-            <!-- CONTEÚDO DAS ABAS -->
-            <div class="bg-bilini-surface rounded-3xl p-8 md:p-12 border border-purple-100">
-                <!-- ADULTOS -->
-                <div x-show="tabCursos === 'adultos'" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <!-- CLUBE BILINI (INSPIRADO NO CLUBE SOU MINDS) -->
+    <section id="clube" class="py-20 bg-bilini-surface border-y border-purple-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-gradient-to-br from-bilini-deep via-bilini-plum to-bilini-primary rounded-3xl p-8 md:p-14 text-white shadow-2xl relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     <div class="lg:col-span-8 space-y-4">
-                        <span class="text-xs font-black uppercase text-bilini-primary bg-purple-100 px-3 py-1 rounded-full">Carreira & Comunicação</span>
-                        <h3 class="text-2xl md:text-3xl font-black text-bilini-deep">English for Adults: Fale com autoridade</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Voltado para jovens e adultos que precisam do inglês para destravar promoções no trabalho, participar de reuniões internacionais ou que simplesmente cansaram de se sentir inseguros ao tentar falar.
+                        <span class="bg-bilini-accent text-bilini-obsidian text-[10px] font-black uppercase px-3 py-1 rounded-full">Exclusividade do Aluno</span>
+                        <h2 class="font-display text-3xl sm:text-4xl font-black">Clube Bilini: Vantagens Além da Sala de Aula</h2>
+                        <p class="text-purple-200 text-sm md:text-base leading-relaxed">
+                            Ser aluno da Bilini é ter acesso a benefícios exclusivos em estabelecimentos parceiros: descontos em cafeterias, cinemas, livrarias e eventos culturais para você vivenciar a língua em momentos de lazer.
                         </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-bold text-gray-700">
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Vocabulário corporativo e casual</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Simulação de entrevistas e apresentações</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Redução de sotaque e fluidez</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Horários flexíveis à noite e sábados</div>
+                        <div class="flex flex-wrap gap-4 pt-2 text-xs font-bold text-bilini-gold">
+                            <span class="flex items-center gap-1.5"><i class="fas fa-ticket-alt"></i> Ingressos de Cinema com Desconto</span>
+                            <span class="flex items-center gap-1.5"><i class="fas fa-mug-hot"></i> Parcerias em Cafés e Lounges</span>
+                            <span class="flex items-center gap-1.5"><i class="fas fa-book"></i> Descontos em Livrarias</span>
                         </div>
                     </div>
-                    <div class="lg:col-span-4 text-center">
-                        <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20saber%20valores%20e%20hor%C3%A1rios%20do%20curso%20English%20for%20Adults." target="_blank"
-                           class="w-full inline-block bg-bilini-primary hover:bg-bilini-deep text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg transition text-sm uppercase">
-                            Consultar Turmas de Adultos &rarr;
-                        </a>
-                    </div>
-                </div>
-
-                <!-- KIDS -->
-                <div x-show="tabCursos === 'kids'" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" style="display: none;">
-                    <div class="lg:col-span-8 space-y-4">
-                        <span class="text-xs font-black uppercase text-yellow-800 bg-yellow-100 px-3 py-1 rounded-full">Pedagogia Lúdica</span>
-                        <h3 class="text-2xl md:text-3xl font-black text-bilini-deep">Kids & Teens: Inglês natural desde a infância</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Crianças e adolescentes não aprendem com apostilas chatas. Na Bilini, eles aprendem através de jogos, interação, músicas e conversação ativa, desenvolvendo a pronúncia certa de forma espontânea.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-bold text-gray-700">
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Estímulo à criatividade e fala</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Professores capacitados e carinhosos</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Reforço e apoio escolar incluso</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Material visual e dinâmico</div>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-4 text-center">
-                        <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20turmas%20Kids%20%26%20Teens%20da%20Bilini." target="_blank"
-                           class="w-full inline-block bg-bilini-primary hover:bg-bilini-deep text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg transition text-sm uppercase">
-                            Ver Turmas Kids & Teens &rarr;
-                        </a>
-                    </div>
-                </div>
-
-                <!-- VIAGEM -->
-                <div x-show="tabCursos === 'viagem'" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" style="display: none;">
-                    <div class="lg:col-span-8 space-y-4">
-                        <span class="text-xs font-black uppercase text-purple-700 bg-purple-100 px-3 py-1 rounded-full">Foco Prático Imediato</span>
-                        <h3 class="text-2xl md:text-3xl font-black text-bilini-deep">Travel Express: Viaje sem passar perrengue</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Tem viagem marcada nos próximos meses? Esse treinamento intensivo foca nas 50 situações reais que você vai viver: alfândega, check-in, compras, restaurantes, emergências médicas e direções.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-bold text-gray-700">
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Vocabulário 100% de aeroporto e hotel</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Duração compacta e intensiva</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Como resolver imprevistos no exterior</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Sem perder tempo com gramática inútil</div>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-4 text-center">
-                        <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Tenho%20uma%20viagem%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20do%20Travel%20Express." target="_blank"
-                           class="w-full inline-block bg-bilini-primary hover:bg-bilini-deep text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg transition text-sm uppercase">
-                            Quero o Intensivo de Viagem &rarr;
-                        </a>
-                    </div>
-                </div>
-
-                <!-- VIP -->
-                <div x-show="tabCursos === 'vip'" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" style="display: none;">
-                    <div class="lg:col-span-8 space-y-4">
-                        <span class="text-xs font-black uppercase text-bilini-gold bg-purple-900 px-3 py-1 rounded-full">Exclusividade Total</span>
-                        <h3 class="text-2xl md:text-3xl font-black text-bilini-deep">Mentoria VIP: 100% Personalizado para Você</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Professor exclusivo para o seu ritmo, com foco cirúrgico nas suas maiores dificuldades. Perfeito para executivos, médicos, profissionais com agendas apertadas ou quem tem urgência máxima em destravar.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-bold text-gray-700">
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Horários marcados conforme sua rotina</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Conteúdo customizado para sua área</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Evolução 3x mais rápida</div>
-                            <div class="flex items-center gap-2"><i class="fas fa-check text-bilini-primary"></i> Feedback contínuo pós-aula</div>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-4 text-center">
-                        <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20particulares%20VIP%20da%20Bilini." target="_blank"
-                           class="w-full inline-block bg-bilini-primary hover:bg-bilini-deep text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg transition text-sm uppercase">
-                            Consultar Aulas VIP &rarr;
+                    <div class="lg:col-span-4 text-center lg:text-right">
+                        <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Quero%20saber%20como%20funciona%20o%20Clube%20Bilini%20e%20aulas!" target="_blank"
+                           class="inline-block bg-bilini-gold hover:bg-yellow-400 text-bilini-obsidian font-black px-8 py-4 rounded-xl text-xs uppercase tracking-wider shadow-xl transition">
+                            Quero Ser Aluno & Clube &rarr;
                         </a>
                     </div>
                 </div>
@@ -459,147 +604,187 @@
         </div>
     </section>
 
-    <!-- FAQ COM ACORDEÃO ANIMADO (QUEBRA DE OBJEÇÕES) -->
-    <section id="faq" class="py-24 bg-bilini-surface border-t border-purple-100" x-data="{ selected: null }">
+    <!-- CALCULADORA DE TEMPO ATÉ A FLUÊNCIA (INTERATIVIDADE FORTE) -->
+    <section id="simulador" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-bilini-primary uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Simulador Interativo</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-black text-bilini-deep mt-4">Quanto tempo até a sua fluência?</h2>
+                <p class="text-gray-600 mt-2 text-sm">Selecione seu objetivo e veja o plano de evolução recomendado:</p>
+            </div>
+
+            <div class="bg-bilini-surface p-8 sm:p-10 rounded-3xl border border-purple-100 shadow-sm grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-6">
+                    <div>
+                        <label class="block text-xs font-black uppercase text-gray-700 mb-2">1. Qual seu objetivo principal?</label>
+                        <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+                            <button @click="objetivo = 'carreira'; calcMeses = 18" :class="objetivo === 'carreira' ? 'bg-bilini-primary text-white' : 'bg-white text-gray-700 border border-gray-200'" class="p-3 rounded-xl transition text-left">
+                                <i class="fas fa-briefcase mr-1"></i> Carreira & Entrevistas
+                            </button>
+                            <button @click="objetivo = 'viagem'; calcMeses = 3" :class="objetivo === 'viagem' ? 'bg-bilini-primary text-white' : 'bg-white text-gray-700 border border-gray-200'" class="p-3 rounded-xl transition text-left">
+                                <i class="fas fa-plane mr-1"></i> Viagem Urgente
+                            </button>
+                            <button @click="objetivo = 'filhos'; calcMeses = 12" :class="objetivo === 'filhos' ? 'bg-bilini-primary text-white' : 'bg-white text-gray-700 border border-gray-200'" class="p-3 rounded-xl transition text-left">
+                                <i class="fas fa-child mr-1"></i> Inglês para Filhos
+                            </button>
+                            <button @click="objetivo = 'zero'; calcMeses = 18" :class="objetivo === 'zero' ? 'bg-bilini-primary text-white' : 'bg-white text-gray-700 border border-gray-200'" class="p-3 rounded-xl transition text-left">
+                                <i class="fas fa-seedling mr-1"></i> Do Zero Absoluto
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-black uppercase text-gray-700 mb-2">2. Quanto tempo de prática semanal você tem?</label>
+                        <select class="w-full p-3 rounded-xl border border-gray-200 text-xs font-bold bg-white focus:outline-none focus:border-bilini-primary">
+                            <option>2 a 3 horas por semana (Ideal para o Curso 18 Meses)</option>
+                            <option>4 horas ou mais por semana (Acelera para 12 Meses)</option>
+                            <option>Intensivo aos finais de semana</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 bg-gradient-to-br from-bilini-deep to-bilini-primary p-6 rounded-2xl text-white text-center space-y-4">
+                    <span class="text-[10px] font-black uppercase text-bilini-gold tracking-widest bg-white/10 py-1 px-3 rounded-full">Resultado Estimado</span>
+                    <div class="py-2">
+                        <span class="text-5xl font-black font-display text-white" x-text="calcMeses">18</span>
+                        <span class="text-xl font-bold text-purple-200"> meses</span>
+                        <p class="text-xs text-purple-200 mt-1">Para falar com autonomia e segurança.</p>
+                    </div>
+                    <a :href="`https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Fiz%20o%20simulador%20no%20site%20para%20o%20objetivo%20${objetivo}%20e%20gostaria%20de%20montar%20meu%20cronograma!`" target="_blank"
+                       class="w-full block bg-bilini-accent hover:bg-yellow-400 text-bilini-obsidian font-black py-3 rounded-xl text-xs uppercase tracking-wider transition">
+                        Agendar Diagnóstico Grátis
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ DETALHADO -->
+    <section class="py-24 bg-bilini-surface border-t border-purple-100" x-data="{ faqOpen: null }">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-16">
-                <span class="text-bilini-primary font-extrabold text-xs uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Tire Suas Dúvidas</span>
-                <h2 class="text-3xl sm:text-4xl font-black text-bilini-deep mt-4">Perguntas Frequentes</h2>
+                <span class="text-xs font-extrabold text-bilini-primary uppercase tracking-widest bg-purple-100 px-4 py-1.5 rounded-full">Perguntas Frequentes</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-black text-bilini-deep mt-4">Dúvidas Frequentes sobre a Bilini</h2>
             </div>
 
             <div class="space-y-4">
-                <!-- FAQ 1 -->
-                <div class="bg-white rounded-2xl border border-purple-100 overflow-hidden">
-                    <button @click="selected !== 1 ? selected = 1 : selected = null" class="w-full p-6 text-left flex justify-between items-center font-extrabold text-bilini-deep text-base">
-                        <span>Eu sou muito travado para falar, a Bilini serve para mim?</span>
-                        <i class="fas fa-chevron-down text-bilini-primary transition-transform duration-300" :class="selected === 1 ? 'transform rotate-180' : ''"></i>
+                <div class="bg-white rounded-2xl border border-purple-100 overflow-hidden shadow-sm">
+                    <button @click="faqOpen !== 1 ? faqOpen = 1 : faqOpen = null" class="w-full p-6 text-left flex justify-between items-center font-extrabold text-bilini-deep text-base">
+                        <span>A Bilini realmente me faz falar inglês em 18 meses?</span>
+                        <i class="fas fa-chevron-down text-bilini-primary transition" :class="faqOpen === 1 ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="selected === 1" class="px-6 pb-6 text-sm text-gray-600 leading-relaxed" style="display: none;">
-                        Com certeza! Esse é exatamente o perfil que mais atendemos. Nosso método foi criado para quebrar essa trava psicológica. Você não será julgado por erros; nossos professores conduzem dinâmicas leves que fazem você falar naturalmente sem perceber que está sendo avaliado.
+                    <div x-show="faqOpen === 1" class="px-6 pb-6 text-sm text-gray-600 leading-relaxed" style="display: none;">
+                        Sim! Nosso plano pedagógico elimina repetições desnecessárias. Como as turmas são de até 6 alunos, você pratica a fala durante toda a aula e completa as 4 habilidades (ouvir, falar, ler e escrever) com foco prático de conversação em 18 meses.
                     </div>
                 </div>
 
-                <!-- FAQ 2 -->
-                <div class="bg-white rounded-2xl border border-purple-100 overflow-hidden">
-                    <button @click="selected !== 2 ? selected = 2 : selected = null" class="w-full p-6 text-left flex justify-between items-center font-extrabold text-bilini-deep text-base">
+                <div class="bg-white rounded-2xl border border-purple-100 overflow-hidden shadow-sm">
+                    <button @click="faqOpen !== 2 ? faqOpen = 2 : faqOpen = null" class="w-full p-6 text-left flex justify-between items-center font-extrabold text-bilini-deep text-base">
+                        <span>Posso revezar entre aulas presenciais e online?</span>
+                        <i class="fas fa-chevron-down text-bilini-primary transition" :class="faqOpen === 2 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="faqOpen === 2" class="px-6 pb-6 text-sm text-gray-600 leading-relaxed" style="display: none;">
+                        Exatamente. Nosso modelo híbrido permite que você vá presencialmente na escola para vivenciar as salas temáticas ou faça a aula ao vivo pelo computador nos dias mais corridos, sem perder conteúdo nem ritmo.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-purple-100 overflow-hidden shadow-sm">
+                    <button @click="faqOpen !== 3 ? faqOpen = 3 : faqOpen = null" class="w-full p-6 text-left flex justify-between items-center font-extrabold text-bilini-deep text-base">
                         <span>Como funciona a aula experimental gratuita?</span>
-                        <i class="fas fa-chevron-down text-bilini-primary transition-transform duration-300" :class="selected === 2 ? 'transform rotate-180' : ''"></i>
+                        <i class="fas fa-chevron-down text-bilini-primary transition" :class="faqOpen === 3 ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="selected === 2" class="px-6 pb-6 text-sm text-gray-600 leading-relaxed" style="display: none;">
-                        É uma aula real, sem custo algum. Nela você conhece a metodologia na prática, conversa com o professor, entende em qual nível você se encaixa e vê com os próprios olhos se a experiência faz sentido para o seu momento antes de tomar qualquer decisão.
-                    </div>
-                </div>
-
-                <!-- FAQ 3 -->
-                <div class="bg-white rounded-2xl border border-purple-100 overflow-hidden">
-                    <button @click="selected !== 3 ? selected = 3 : selected = null" class="w-full p-6 text-left flex justify-between items-center font-extrabold text-bilini-deep text-base">
-                        <span>As aulas são presenciais ou online?</span>
-                        <i class="fas fa-chevron-down text-bilini-primary transition-transform duration-300" :class="selected === 3 ? 'transform rotate-180' : ''"></i>
-                    </button>
-                    <div x-show="selected === 3" class="px-6 pb-6 text-sm text-gray-600 leading-relaxed" style="display: none;">
-                        Temos turmas em ambas as modalidades! Se você busca a vivência do ambiente presencial em nossa estrutura, temos salas climatizadas e acolhedoras. Se precisa de praticidade por causa de trabalho ou trânsito, nossas turmas ao vivo online entregam a mesma interação olho no olho.
-                    </div>
-                </div>
-
-                <!-- FAQ 4 -->
-                <div class="bg-white rounded-2xl border border-purple-100 overflow-hidden">
-                    <button @click="selected !== 4 ? selected = 4 : selected = null" class="w-full p-6 text-left flex justify-between items-center font-extrabold text-bilini-deep text-base">
-                        <span>Preciso assinar contratos longos de anos?</span>
-                        <i class="fas fa-chevron-down text-bilini-primary transition-transform duration-300" :class="selected === 4 ? 'transform rotate-180' : ''"></i>
-                    </button>
-                    <div x-show="selected === 4" class="px-6 pb-6 text-sm text-gray-600 leading-relaxed" style="display: none;">
-                        Não trabalhamos com contratos abusivos de fidelidade eterna. Acreditamos na qualidade do nosso ensino: você continua porque está aprendendo de verdade e conquistando resultados na prática.
+                    <div x-show="faqOpen === 3" class="px-6 pb-6 text-sm text-gray-600 leading-relaxed" style="display: none;">
+                        É uma demonstração real com professor da escola. Você vivencia nossa metodologia na prática, avalia seu nível de conhecimento e conhece o ambiente antes de efetuar qualquer matrícula.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BANNER FINAL (CALL TO ACTION DE FECHAMENTO) -->
-    <section class="py-20 gradient-hero text-white text-center relative overflow-hidden">
-        <div class="max-w-4xl mx-auto px-6 space-y-6 relative z-10">
-            <span class="text-xs font-black uppercase tracking-widest text-bilini-gold bg-white/10 px-4 py-1 rounded-full border border-white/15">
-                Não adie mais o seu futuro
-            </span>
-            <h2 class="text-3xl sm:text-5xl font-black leading-tight">Chegou a hora de falar inglês com orgulho e segurança.</h2>
-            <p class="text-purple-100 text-base md:text-lg max-w-2xl mx-auto">
-                Venha fazer uma aula experimental sem custo e descubra como o método Bilini vai destravar a sua fala.
+    <!-- CALL TO ACTION FINAL COM URGÊNCIA -->
+    <section class="py-20 hero-mesh text-white text-center relative">
+        <div class="max-w-4xl mx-auto px-6 space-y-6">
+            <span class="text-xs font-black uppercase text-bilini-gold bg-white/10 px-4 py-1.5 rounded-full border border-white/10">Vagas Limitadas por Turma</span>
+            <h2 class="font-display text-3xl sm:text-5xl font-black">Pronto para dar o passo definitivo no seu inglês?</h2>
+            <p class="text-purple-200 text-base max-w-xl mx-auto">
+                Não espere mais um ano passar. Fale com a coordenação pedagógica da Bilini e agende seu horário experimental gratuito agora mesmo.
             </p>
             <div class="pt-4">
-                <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20minha%20aula%20experimental%20gratuita%20na%20Bilini!" 
-                   target="_blank" class="pulse-gold inline-flex items-center gap-3 bg-bilini-accent hover:bg-yellow-500 text-bilini-deep font-black px-10 py-5 rounded-2xl text-lg shadow-2xl transition transform hover:scale-105">
+                <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Quero%20aproveitar%20a%20aula%20experimental%20gratuita%20da%20Bilini!" target="_blank"
+                   class="animate-pulse-glow inline-flex items-center gap-3 bg-bilini-accent hover:bg-yellow-500 text-bilini-obsidian font-black px-10 py-5 rounded-2xl text-base sm:text-lg uppercase tracking-wider transition">
                     <i class="fab fa-whatsapp text-2xl"></i>
-                    <span>FALAR COM UM COORDENADOR NO WHATSAPP</span>
+                    <span>Conversar no WhatsApp da Bilini</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- RODAPÉ COMPLETO -->
-    <footer class="bg-bilini-deep text-purple-200 py-16 border-t border-purple-900/40 text-xs">
+    <!-- RODAPÉ INSTITUCIONAL ROBUSTO -->
+    <footer class="bg-bilini-obsidian text-purple-300 py-16 border-t border-purple-900/40 text-xs">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
-            
-            <!-- COLUNA 1: MARCA -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-bilini-primary text-white font-black flex items-center justify-center text-lg">B</div>
-                    <span class="font-extrabold text-white tracking-wider text-base uppercase">Bilini Language School</span>
+                    <div class="w-10 h-10 rounded-xl bg-bilini-primary text-white font-black flex items-center justify-center text-xl">B</div>
+                    <div>
+                        <span class="font-display font-black text-white text-lg tracking-tight uppercase block">BILINI</span>
+                        <span class="text-[9px] tracking-widest text-purple-400 font-bold uppercase block -mt-1">Language School</span>
+                    </div>
                 </div>
                 <p class="text-purple-300 leading-relaxed">
-                    Escola especializada em fluência oral rápida, metodologia comunicativa e acolhimento pedagógico para todas as idades.
+                    Centro especializado de formação no idioma inglês com salas temáticas, turmas reduzidas e metodologia de conversação viva.
                 </p>
             </div>
 
-            <!-- COLUNA 2: TRILHAS -->
             <div>
-                <h4 class="font-bold text-white uppercase text-sm mb-4">Modalidades</h4>
-                <ul class="space-y-2 text-purple-300">
-                    <li><a href="#cursos" class="hover:text-bilini-accent">English for Adults</a></li>
-                    <li><a href="#cursos" class="hover:text-bilini-accent">Kids & Teens Program</a></li>
-                    <li><a href="#cursos" class="hover:text-bilini-accent">Intensivo Travel Express</a></li>
-                    <li><a href="#cursos" class="hover:text-bilini-accent">Aulas Particulares VIP</a></li>
+                <h4 class="font-bold text-white uppercase text-sm mb-4">Cursos</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#cursos" class="hover:text-bilini-gold transition">Curso 18 Meses (Híbrido)</a></li>
+                    <li><a href="#cursos" class="hover:text-bilini-gold transition">Curso Flash (30 Dias)</a></li>
+                    <li><a href="#cursos" class="hover:text-bilini-gold transition">Kids and Teens (9 aos 17)</a></li>
+                    <li><a href="#cursos" class="hover:text-bilini-gold transition">Atendimentos e Viagens</a></li>
+                    <li><a href="#cursos" class="hover:text-bilini-gold transition">Curso In Company</a></li>
                 </ul>
             </div>
 
-            <!-- COLUNA 3: CONTATO -->
             <div>
-                <h4 class="font-bold text-white uppercase text-sm mb-4">Atendimento</h4>
-                <p class="text-purple-300 mb-2 flex items-center gap-2"><i class="fab fa-whatsapp text-green-400"></i> (11) 99117-4412</p>
-                <p class="text-purple-300 mb-2 flex items-center gap-2"><i class="fab fa-instagram text-purple-400"></i> @bilinilanguageschool</p>
-                <p class="text-purple-300 text-[11px] mt-4">Segunda a Sexta: 08h às 21h <br> Sábados: 08h às 14h</p>
+                <h4 class="font-bold text-white uppercase text-sm mb-4">A Bilini</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#diferenciais" class="hover:text-bilini-gold transition">Por que a Bilini</a></li>
+                    <li><a href="#espacos" class="hover:text-bilini-gold transition">Salas Temáticas</a></li>
+                    <li><a href="#clube" class="hover:text-bilini-gold transition">Clube Bilini</a></li>
+                    <li><a href="#simulador" class="hover:text-bilini-gold transition">Calculadora de Fluência</a></li>
+                </ul>
             </div>
 
-            <!-- COLUNA 4: REDES -->
             <div>
-                <h4 class="font-bold text-white uppercase text-sm mb-4">Siga a Bilini</h4>
-                <div class="flex gap-3 text-lg">
-                    <a href="https://instagram.com/bilinilanguageschool" target="_blank" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-bilini-primary flex items-center justify-center text-white transition"><i class="fab fa-instagram"></i></a>
-                    <a href="https://api.whatsapp.com/send?phone=5511991174412" target="_blank" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-green-600 flex items-center justify-center text-white transition"><i class="fab fa-whatsapp"></i></a>
-                </div>
+                <h4 class="font-bold text-white uppercase text-sm mb-4">Atendimento Direto</h4>
+                <p class="flex items-center gap-2 mb-2 font-bold text-white"><i class="fab fa-whatsapp text-green-400"></i> (11) 99117-4412</p>
+                <p class="flex items-center gap-2 mb-4 text-purple-300"><i class="fab fa-instagram text-purple-400"></i> @bilinilanguageschool</p>
+                <p class="text-[11px] text-purple-400">Segunda a Sexta: 08:00 às 21:00<br>Sábados: 08:00 às 14:00</p>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-white/10 text-center text-purple-400 text-[11px]">
-            &copy; 2026 Bilini Language School. Todos os direitos reservados. Foco em conversação e confiança no idioma.
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center text-purple-400 text-[11px] gap-4">
+            <p>&copy; 2026 Bilini Language School. Todos os direitos reservados.</p>
+            <p>Desenvolvido com padrão internacional de performance e conversão.</p>
         </div>
     </footer>
 
     <!-- BOTÃO FLUTUANTE WHATSAPP -->
-    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida." target="_blank"
+    <a href="https://api.whatsapp.com/send?phone=5511991174412&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Bilini%20e%20gostaria%20de%20agendar%20uma%20aula%20experimental%20gratuita." target="_blank"
        class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl transition duration-300 transform hover:scale-110">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- SCRIPT DE ENVIO DO FORMULÁRIO -->
     <script>
-        function enviarFormularioWhatsApp() {
-            const nome = document.getElementById('leadNome').value;
-            const zap = document.getElementById('leadWhatsapp').value;
-            const objetivo = document.getElementById('leadObjetivo').value;
-            
-            const mensagem = `Olá, Bilini! Meu nome é ${nome} (${zap}). Gostaria de agendar minha aula experimental gratuita para o curso: ${objetivo}!`;
+        function enviarFormLead() {
+            const nome = document.getElementById('formNome').value;
+            const zap = document.getElementById('formZap').value;
+            const modalidade = document.getElementById('formModalidade').value;
+
+            const mensagem = `Olá, Bilini! Meu nome é ${nome} (${zap}). Vim pelo site e gostaria de agendar uma aula experimental gratuita para o curso: ${modalidade}!`;
             const url = `https://api.whatsapp.com/send?phone=5511991174412&text=${encodeURIComponent(mensagem)}`;
-            
             window.open(url, '_blank');
         }
     </script>
